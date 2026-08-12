@@ -82,7 +82,11 @@ pub struct MouseEvent {
 /// Encodes a mouse event in the SGR protocol: `ESC [ < Cb ; Cx ; Cy M/m`.
 pub fn mouse_sequence(ev: &MouseEvent) -> Vec<u8> {
     let final_char = if ev.press { b'M' } else { b'm' };
-    format!("\x1b[<{};{};{}{}", ev.button, ev.x, ev.y, final_char as char).into_bytes()
+    format!(
+        "\x1b[<{};{};{}{}",
+        ev.button, ev.x, ev.y, final_char as char
+    )
+    .into_bytes()
 }
 
 /// A left-button press at the given 1-based cell.

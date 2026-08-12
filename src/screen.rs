@@ -55,7 +55,8 @@ impl ScreenState {
                         }
                     };
                     let has_private = seq.contains('?') || seq.contains('$');
-                    let numeric = seq.is_empty() || seq.replace(';', "").chars().all(|c| c.is_ascii_digit());
+                    let numeric =
+                        seq.is_empty() || seq.replace(';', "").chars().all(|c| c.is_ascii_digit());
                     if has_private || !numeric {
                         // Ignore private/query sequences and unknown params.
                     } else {
@@ -214,15 +215,6 @@ impl ScreenState {
         (0..self.cols).map(|x| self.cell(x, y)).collect()
     }
 
-    /// All non-empty lines as a string.
-    pub fn to_string(&self) -> String {
-        (0..self.rows)
-            .map(|y| self.line(y).trim_end().to_string())
-            .filter(|l| !l.trim().is_empty())
-            .collect::<Vec<_>>()
-            .join("\n")
-    }
-
     /// Whether the given text appears anywhere on the screen.
     pub fn contains(&self, text: &str) -> bool {
         self.to_string().contains(text)
@@ -262,6 +254,11 @@ impl ScreenState {
 
 impl std::fmt::Display for ScreenState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.to_string())
+        let s = (0..self.rows)
+            .map(|y| self.line(y).trim_end().to_string())
+            .filter(|l| !l.trim().is_empty())
+            .collect::<Vec<_>>()
+            .join("\n");
+        write!(f, "{s}")
     }
 }

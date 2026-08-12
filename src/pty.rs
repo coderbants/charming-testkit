@@ -34,7 +34,12 @@ impl PtySession {
         };
 
         unsafe {
-            let pid = libc::forkpty(&mut master, std::ptr::null_mut(), std::ptr::null_mut(), &mut ws);
+            let pid = libc::forkpty(
+                &mut master,
+                std::ptr::null_mut(),
+                std::ptr::null_mut(),
+                &mut ws,
+            );
             if pid < 0 {
                 return Err(TestError::Spawn(format!(
                     "forkpty failed: {}",
@@ -44,8 +49,7 @@ impl PtySession {
             if pid == 0 {
                 // Child: exec the command.
                 let c_cmd = std::ffi::CString::new(cmd).unwrap();
-                let mut c_args: Vec<std::ffi::CString> =
-                    vec![c_cmd.clone()];
+                let mut c_args: Vec<std::ffi::CString> = vec![c_cmd.clone()];
                 for a in args {
                     c_args.push(std::ffi::CString::new(*a).unwrap());
                 }
