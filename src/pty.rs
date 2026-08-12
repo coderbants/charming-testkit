@@ -26,7 +26,7 @@ impl PtySession {
     /// Spawns `cmd` with `args` attached to a pty of the given size.
     pub fn spawn_with_size(cmd: &str, args: &[&str], rows: u16, cols: u16) -> Result<PtySession> {
         let mut master: libc::c_int = 0;
-        let mut ws = libc::winsize {
+        let ws = libc::winsize {
             ws_row: rows,
             ws_col: cols,
             ws_xpixel: 0,
@@ -34,11 +34,13 @@ impl PtySession {
         };
 
         unsafe {
+            // The winsize argument is `*const` on Linux and `*mut` on macOS;
+            // a const borrow works for both signatures.
             let pid = libc::forkpty(
                 &mut master,
                 std::ptr::null_mut(),
                 std::ptr::null_mut(),
-                &mut ws,
+                std::ptr::from_ref(&ws) as *mut libc::winsize,
             );
             if pid < 0 {
                 return Err(TestError::Spawn(format!(
