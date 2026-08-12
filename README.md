@@ -1,6 +1,7 @@
 <p>
     <a href="charming_testkit.png"><img src="charming_testkit.png" width="313" alt="Charming Testkit"></a><br>
     <a href="https://crates.io/crates/charming-testkit"><img src="https://img.shields.io/crates/v/charming-testkit.svg" alt="crates.io"></a>
+    <a href="https://github.com/coderbants/charming-testkit/actions"><img src="https://github.com/coderbants/charming-testkit/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
 </p>
 
 # Charming Testkit (`charming-testkit`)
