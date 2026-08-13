@@ -68,6 +68,8 @@ jobs:
           mv siblings/charming-lipgloss ../charming-lipgloss
           mv siblings/charming-ultraviolet ../charming-ultraviolet
           mv siblings/charming-x-ansi ../charming-x-ansi
+      - name: Verify version matches upstream
+        run: scripts/verify_upstream_version.sh
       - name: Compare version with live branch
         run: |
           cur=$(grep -m1 '^version' Cargo.toml | sed 's/.*"\(.*\)".*/\1/')
