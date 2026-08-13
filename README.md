@@ -1,4 +1,4 @@
-<p>
+<p align="center">
     <a href="rusty_testkit.png"><img src="rusty_testkit.png" width="313" alt="Rusty Testkit"></a><br>
     <a href="https://crates.io/crates/rusty-testkit"><img src="https://img.shields.io/crates/v/rusty-testkit.svg" alt="crates.io"></a>
     <a href="https://github.com/coderbants/rusty-testkit/actions"><img src="https://github.com/coderbants/rusty-testkit/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
