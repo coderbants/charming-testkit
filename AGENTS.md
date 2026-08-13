@@ -1,8 +1,8 @@
-# Agent Instructions for `charming-testkit`
+# Agent Instructions for `rusty-testkit`
 
 > [!IMPORTANT]
-> `charming-testkit` is an ORIGINAL crate (the PTY-driven integration test harness for the
-> `charming-*` TUI crates) — it is not a port of any upstream Go repository, so the
+> `rusty-testkit` is an ORIGINAL crate (the PTY-driven integration test harness for the
+> `rusty-*` TUI crates) — it is not a port of any upstream Go repository, so the
 > upstream-mirror version policy does NOT apply to it. `scripts/verify_upstream_version.sh`
 > treats it accordingly.
 

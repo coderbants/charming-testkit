@@ -1,4 +1,4 @@
-use charming_testkit::PtySession;
+use rusty_testkit::PtySession;
 
 #[test]
 fn spawn_and_capture() {

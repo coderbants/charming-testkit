@@ -1,8 +1,8 @@
 [package]
-name = "charming-testkit"
+name = "rusty-testkit"
 version = "0.1.1"
 edition = "2021"
-description = "PTY-driven integration test harness for the charming-* TUI crates (Playwright-style: type, mouse, resize, and assert on the rendered screen)"
+description = "PTY-driven integration test harness for the rusty-* TUI crates (Playwright-style: type, mouse, resize, and assert on the rendered screen)"
 license = "MIT"
 
 [dependencies]

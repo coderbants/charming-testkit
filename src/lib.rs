@@ -1,4 +1,4 @@
-//! Cleanroom test harness for the `charming-*` TUI crates.
+//! Cleanroom test harness for the `rusty-*` TUI crates.
 //!
 //! <public-docs>
 //! A Playwright-style integration harness for terminal programs: spawn an
@@ -6,7 +6,7 @@
 //! the terminal, and assert on the reconstructed on-screen state.
 //!
 //! ```no_run
-//! use charming_testkit::PtySession;
+//! use rusty_testkit::PtySession;
 //!
 //! let mut pty = PtySession::spawn("target/debug/examples/textinput", &[])?;
 //! pty.wait_for_text("Type something", 5000)?;

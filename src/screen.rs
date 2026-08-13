@@ -1,6 +1,6 @@
 //! Reconstructs the on-screen state from a terminal's raw output by
 //! replaying the cursor-movement and erase escape sequences (a terminal
-//! emulator in miniature, covering the sequences the charming examples
+//! emulator in miniature, covering the sequences the rusty examples
 //! emit).
 
 use std::collections::HashMap;
