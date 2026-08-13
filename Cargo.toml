@@ -1,6 +1,6 @@
 [package]
 name = "charming-testkit"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "PTY-driven integration test harness for the charming-* TUI crates (Playwright-style: type, mouse, resize, and assert on the rendered screen)"
 license = "MIT"
