@@ -88,7 +88,7 @@ jobs:
         run: |
           src="${GITHUB_REPOSITORY##*/}-$GITHUB_REF_NAME.tar.gz"
           git archive --format=tar.gz -o "$src" HEAD
-          gh release upload "$GITHUB_REF_NAME" "$src"
+          gh release upload "$GITHUB_REF_NAME" "$src" --clobber
       # Every merge to the live branch publishes to crates.io. crates.io
       # rejects re-publishing an existing version, so the version-bump gate
       # in ci.yml must pass for any merge to land.
