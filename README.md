@@ -2,6 +2,8 @@
     <a href="rusty_testkit.png"><img src="rusty_testkit.png" width="313" alt="Rusty Testkit"></a><br>
     <a href="https://crates.io/crates/rusty-testkit"><img src="https://img.shields.io/crates/v/rusty-testkit.svg" alt="crates.io"></a>
     <a href="https://github.com/coderbants/rusty-testkit/actions"><img src="https://github.com/coderbants/rusty-testkit/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://app.codecov.io/gh/coderbants/rusty-testkit"><img src="https://codecov.io/gh/coderbants/rusty-testkit/branch/dev/graph/badge.svg" alt="codecov"></a>
+
 </p>
 
 # Rusty Testkit (`rusty-testkit`)
