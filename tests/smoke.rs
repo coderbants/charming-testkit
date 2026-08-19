@@ -23,10 +23,15 @@ fn screen_grid() {
 
 #[test]
 fn type_and_echo() {
-    let pty = PtySession::spawn("sh", &["-c", "read x; echo got:$x; sleep 1"]).expect("spawn");
+    let mut pty = PtySession::spawn("sh", &["-c", "read x; echo got:$x; sleep 1"]).expect("spawn");
     std::thread::sleep(std::time::Duration::from_millis(200));
     pty.type_text("hello").expect("type");
     pty.press("enter").expect("enter");
     pty.wait_for_text("got:hello", 5000).expect("text");
+    pty.wait_for_raw("got:hello", 5000).expect("raw text");
+    assert!(!pty.raw_output().is_empty());
+    assert!(pty.master_fd() >= 0);
+    assert!(pty.resize(30, 100).is_ok());
+    let _ = pty.wait_for_exit(3000);
     pty.kill();
 }

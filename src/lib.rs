@@ -72,3 +72,24 @@ impl From<String> for TestError {
 
 /// Result alias for the harness.
 pub type Result<T> = std::result::Result<T, TestError>;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_error_display_and_conversions() {
+        let e1 = TestError::Timeout("time out".into());
+        assert_eq!(format!("{}", e1), "timeout: time out");
+
+        let e2 = TestError::Exited(1);
+        assert_eq!(format!("{}", e2), "program exited with status 1");
+
+        let io_err = std::io::Error::new(std::io::ErrorKind::NotFound, "file not found");
+        let e3: TestError = io_err.into();
+        assert!(format!("{}", e3).contains("file not found"));
+
+        let e4: TestError = "spawn failed".to_string().into();
+        assert_eq!(format!("{}", e4), "spawn failed: spawn failed");
+    }
+}

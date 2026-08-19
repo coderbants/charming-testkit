@@ -138,3 +138,68 @@ pub fn mouse_drag(button: u8, x: u16, y: u16) -> Vec<u8> {
         press: true,
     })
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_all_key_sequences() {
+        let keys = [
+            ("enter", b"\r".to_vec()),
+            ("tab", b"\t".to_vec()),
+            ("backspace", b"\x7f".to_vec()),
+            ("space", b" ".to_vec()),
+            ("esc", b"\x1b".to_vec()),
+            ("up", b"\x1b[A".to_vec()),
+            ("down", b"\x1b[B".to_vec()),
+            ("right", b"\x1b[C".to_vec()),
+            ("left", b"\x1b[D".to_vec()),
+            ("home", b"\x1b[H".to_vec()),
+            ("end", b"\x1b[F".to_vec()),
+            ("pgup", b"\x1b[5~".to_vec()),
+            ("pgdown", b"\x1b[6~".to_vec()),
+            ("delete", b"\x1b[3~".to_vec()),
+            ("insert", b"\x1b[2~".to_vec()),
+            ("ctrl+a", b"\x01".to_vec()),
+            ("ctrl+b", b"\x02".to_vec()),
+            ("ctrl+c", b"\x03".to_vec()),
+            ("ctrl+d", b"\x04".to_vec()),
+            ("ctrl+e", b"\x05".to_vec()),
+            ("ctrl+f", b"\x06".to_vec()),
+            ("ctrl+g", b"\x07".to_vec()),
+            ("ctrl+h", b"\x08".to_vec()),
+            ("ctrl+i", b"\x09".to_vec()),
+            ("ctrl+j", b"\x0a".to_vec()),
+            ("ctrl+k", b"\x0b".to_vec()),
+            ("ctrl+l", b"\x0c".to_vec()),
+            ("ctrl+m", b"\x0d".to_vec()),
+            ("ctrl+n", b"\x0e".to_vec()),
+            ("ctrl+o", b"\x0f".to_vec()),
+            ("ctrl+p", b"\x10".to_vec()),
+            ("ctrl+q", b"\x11".to_vec()),
+            ("ctrl+r", b"\x12".to_vec()),
+            ("ctrl+s", b"\x13".to_vec()),
+            ("ctrl+t", b"\x14".to_vec()),
+            ("ctrl+u", b"\x15".to_vec()),
+            ("ctrl+v", b"\x16".to_vec()),
+            ("ctrl+w", b"\x17".to_vec()),
+            ("ctrl+x", b"\x18".to_vec()),
+            ("ctrl+y", b"\x19".to_vec()),
+            ("ctrl+z", b"\x1a".to_vec()),
+            ("abc", b"abc".to_vec()),
+        ];
+        for (name, expected) in keys {
+            assert_eq!(key_sequence(name), expected);
+        }
+    }
+
+    #[test]
+    fn test_mouse_sequences() {
+        assert_eq!(mouse_click(5, 10), b"\x1b[<0;5;10M");
+        assert_eq!(mouse_right_click(5, 10), b"\x1b[<2;5;10M");
+        assert_eq!(mouse_release(5, 10), b"\x1b[<3;5;10m");
+        assert_eq!(mouse_motion(5, 10), b"\x1b[<35;5;10M");
+        assert_eq!(mouse_drag(MOUSE_LEFT, 5, 10), b"\x1b[<32;5;10M");
+    }
+}

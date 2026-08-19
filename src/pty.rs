@@ -272,3 +272,22 @@ pub fn read_chunk(master: &mut std::fs::File) -> std::io::Result<Vec<u8>> {
     let n = master.read(&mut buf)?;
     Ok(buf[..n].to_vec())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_read_chunk_from_file() {
+        use std::io::Write;
+        let path = "/tmp/rusty_testkit_chunk.tmp";
+        let mut f = std::fs::File::create(path).unwrap();
+        f.write_all(b"test chunk").unwrap();
+        drop(f);
+
+        let mut f_read = std::fs::File::open(path).unwrap();
+        let chunk = read_chunk(&mut f_read).unwrap();
+        assert_eq!(chunk, b"test chunk");
+        let _ = std::fs::remove_file(path);
+    }
+}

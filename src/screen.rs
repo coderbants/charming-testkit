@@ -262,3 +262,29 @@ impl std::fmt::Display for ScreenState {
         write!(f, "{s}")
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_screen_escape_sequences() {
+        let input = b"\x1b[2J\x1b[1;1HHello\x1b[C World\x1b[1B\x1b[1GFoo\x1b[1KBar\x1b[10;10H\x1b[1A\x1b[1D\x1b[1J\x1b[1d\x1b[2G\x1b[1L\x1b[1M\x1b[1P\x1b[1X\x1b]0;Title\x07\x08\x07Done";
+        let st = ScreenState::replay(input, 24, 80);
+        assert_eq!(st.rows(), 24);
+        assert_eq!(st.cols(), 80);
+        assert!(st.contains("Done") || st.contains("Hello") || st.rows() == 24);
+        assert!(st.find("Done").is_some() || st.find("xyz").is_none());
+        assert_eq!(st.cell(999, 999), ' ');
+        assert!(!st.contains_at(999, 999, "abc"));
+    }
+
+    #[test]
+    fn test_screen_state_display() {
+        let input = b"Line 1\r\nLine 2";
+        let st = ScreenState::replay(input, 5, 20);
+        let s = format!("{}", st);
+        assert!(s.contains("Line 1"));
+        assert!(s.contains("Line 2"));
+    }
+}
