@@ -1,8 +1,8 @@
 <p align="center">
-    <a href="rusty-testkit.png"><img src="rusty-testkit.png" width="313" alt="Rusty Testkit"></a><br>
+    <a href="https://raw.githubusercontent.com/coderbants/rusty-testkit/dev/rusty-testkit.png"><img src="https://raw.githubusercontent.com/coderbants/rusty-testkit/dev/rusty-testkit.png" width="313" alt="Rusty Testkit"></a><br>
     <a href="https://crates.io/crates/rusty-testkit"><img src="https://img.shields.io/crates/v/rusty-testkit.svg" alt="crates.io"></a>
     <a href="https://github.com/coderbants/rusty-testkit/actions"><img src="https://github.com/coderbants/rusty-testkit/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
-    <a href="coverage.svg"><img src="coverage.svg" alt="coverage"></a>
+    <a href="https://raw.githubusercontent.com/coderbants/rusty-testkit/dev/coverage.svg"><img src="https://raw.githubusercontent.com/coderbants/rusty-testkit/dev/coverage.svg" alt="coverage"></a>
 
 </p>
 
