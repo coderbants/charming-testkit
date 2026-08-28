@@ -3,6 +3,7 @@ name = "rusty-testkit"
 exclude = ["POLICIES.md"]
 version = "0.1.1"
 edition = "2021"
+rust-version = "1.98.0"
 description = "PTY-driven integration test harness for the rusty-* TUI crates (Playwright-style: type, mouse, resize, and assert on the rendered screen)"
 license = "MIT"
 
