@@ -1,9 +1,13 @@
 //! Cleanroom test harness for the `rusty-*` TUI crates.
 //!
-//! <public-docs>
+//! <user-docs>
 //! A Playwright-style integration harness for terminal programs: spawn an
 //! example binary in a pseudo-terminal, send keys and mouse events, resize
 //! the terminal, and assert on the reconstructed on-screen state.
+//!
+//! PTY spawning is implemented on Unix. On Windows, the public harness types
+//! remain available for dependency validation, while PTY operations return a
+//! stable unsupported error until a native Windows PTY backend is provided.
 //!
 //! ```no_run
 //! use rusty_testkit::PtySession;
@@ -17,7 +21,7 @@
 //! pty.wait_for_exit(3000)?;
 //! # Ok::<(), Box<dyn std::error::Error>>(())
 //! ```
-//! </public-docs>
+//! </user-docs>
 
 pub mod keys;
 pub mod mouse;
@@ -43,6 +47,8 @@ pub enum TestError {
     Io(std::io::Error),
     /// The spawn failed.
     Spawn(String),
+    /// The requested PTY operation is not implemented on this host.
+    Unsupported(String),
 }
 
 impl std::fmt::Display for TestError {
@@ -52,6 +58,7 @@ impl std::fmt::Display for TestError {
             TestError::Exited(code) => write!(f, "program exited with status {code}"),
             TestError::Io(e) => write!(f, "io error: {e}"),
             TestError::Spawn(msg) => write!(f, "spawn failed: {msg}"),
+            TestError::Unsupported(msg) => write!(f, "unsupported: {msg}"),
         }
     }
 }
@@ -91,5 +98,8 @@ mod tests {
 
         let e4: TestError = "spawn failed".to_string().into();
         assert_eq!(format!("{}", e4), "spawn failed: spawn failed");
+
+        let e5 = TestError::Unsupported("PTY is deferred".into());
+        assert_eq!(format!("{}", e5), "unsupported: PTY is deferred");
     }
 }

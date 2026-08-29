@@ -192,6 +192,8 @@ jobs:
           cargo tarpaulin --all-features --out xml --output-dir target/tarpaulin -- --test-threads=1 2>&1 | tee /tmp/tarpaulin.log
 
       - name: Write coverage badge in place
+        # Pull-request coverage is read-only; only the protected dev push may update the badge.
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
         run: |
           raw="$(grep -oE 'line-rate="[0-9.]+' target/tarpaulin/cobertura.xml | head -1 | grep -oE '[0-9.]+')"
           pct="$(awk -v r="$raw" 'BEGIN { printf "%.1f", r * 100 }')"
