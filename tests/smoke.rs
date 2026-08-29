@@ -1,3 +1,5 @@
+#![cfg(unix)]
+
 use rusty_testkit::PtySession;
 
 #[test]
